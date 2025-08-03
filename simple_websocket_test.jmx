@@ -22,7 +22,7 @@
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request - WebSocket Endpoint Test">
           <stringProp name="HTTPSampler.domain">113.198.66.77</stringProp>
-          <stringProp name="HTTPSampler.port">13152</stringProp>
+          <stringProp name="HTTPSampler.port">10152</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/ws</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>

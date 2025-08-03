@@ -35,14 +35,16 @@
         <eu.luminis.jmeter.wssampler.OpenWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.OpenWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.OpenWebSocketSampler" testname="Open Connection" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="readTimeout">6000</stringProp>
         </eu.luminis.jmeter.wssampler.OpenWebSocketSampler>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="CONNECT" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">CONNECT
@@ -51,12 +53,16 @@ heart-beat:0,0
 
 &#x0;</stringProp>
           <boolProp name="createNewConnection">false</boolProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="payloadType">Text</stringProp>
+          <boolProp name="loadDataFromFile">false</boolProp>
+          <stringProp name="dataFile"></stringProp>
         </eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SUBSCRIBE" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SUBSCRIBE
@@ -65,12 +71,16 @@ destination:/topic/chat
 
 &#x0;</stringProp>
           <boolProp name="createNewConnection">false</boolProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="payloadType">Text</stringProp>
+          <boolProp name="loadDataFromFile">false</boolProp>
+          <stringProp name="dataFile"></stringProp>
         </eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 1" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
@@ -79,12 +89,16 @@ content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message1}&quot;}&#x0;</stringProp>
           <boolProp name="createNewConnection">false</boolProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="payloadType">Text</stringProp>
+          <boolProp name="loadDataFromFile">false</boolProp>
+          <stringProp name="dataFile"></stringProp>
         </eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 2" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
@@ -93,12 +107,16 @@ content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message2}&quot;}&#x0;</stringProp>
           <boolProp name="createNewConnection">false</boolProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="payloadType">Text</stringProp>
+          <boolProp name="loadDataFromFile">false</boolProp>
+          <stringProp name="dataFile"></stringProp>
         </eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 3" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">13152</stringProp>
+          <stringProp name="port">10162</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
@@ -107,9 +125,13 @@ content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message3}&quot;}&#x0;</stringProp>
           <boolProp name="createNewConnection">false</boolProp>
+          <stringProp name="connectTimeout">20000</stringProp>
+          <stringProp name="payloadType">Text</stringProp>
+          <boolProp name="loadDataFromFile">false</boolProp>
+          <stringProp name="dataFile"></stringProp>
         </eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -146,7 +168,7 @@ content-type:application/json
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -215,7 +237,7 @@ content-type:application/json
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results">
+        <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

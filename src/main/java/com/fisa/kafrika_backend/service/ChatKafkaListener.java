@@ -21,7 +21,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+// @Component // Kafka 테스트 시에만 활성화
 @RequiredArgsConstructor
 public class ChatKafkaListener {
 
@@ -48,10 +48,10 @@ public class ChatKafkaListener {
                     .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
             ChatMessage saved = chattingRepository.save(ChatMessage.builder()
-                            .detailMessage(chatMessageRequest.getMessage())
-                            .chatRoom(chatRoom)
-                            .user(user)
-                            .build());
+                    .detailMessage(chatMessageRequest.getMessage())
+                    .chatRoom(chatRoom)
+                    .user(user)
+                    .build());
 
             messagingTemplate.convertAndSend("/topic/chat", ChatMessageResponse.builder()
                     .id(saved.getId())
@@ -66,7 +66,7 @@ public class ChatKafkaListener {
             log.error("Kafka 처리 실패", e);
         }
     }
-    
+
     /**
      * "user1", "user2" 형태의 문자열에서 숫자만 추출하여 Long으로 변환
      */
@@ -74,13 +74,13 @@ public class ChatKafkaListener {
         if (userIdStr == null || userIdStr.trim().isEmpty()) {
             throw new IllegalArgumentException("UserId cannot be null or empty");
         }
-        
+
         // "user1" -> "1", "user2" -> "2"
         String numericPart = userIdStr.replaceAll("[^0-9]", "");
         if (numericPart.isEmpty()) {
             throw new IllegalArgumentException("UserId must contain numeric part: " + userIdStr);
         }
-        
+
         return Long.parseLong(numericPart);
     }
 }
