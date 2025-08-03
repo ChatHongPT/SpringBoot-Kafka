@@ -1,5 +1,5 @@
 # Java 17 런타임 이미지 사용 (더 가벼움)
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre
 
 # 작업 디렉토리 설정
 WORKDIR /app
