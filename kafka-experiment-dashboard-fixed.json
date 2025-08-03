@@ -1,12 +1,12 @@
 {
   "id": null,
-  "title": "Kafka 실험 대시보드",
+  "title": "Kafka Experiment Dashboard",
   "tags": ["kafka", "experiment", "performance"],
   "timezone": "browser",
   "panels": [
     {
       "id": 1,
-      "title": "CPU 사용률 (%)",
+      "title": "시스템 CPU 사용률 (%)",
       "type": "stat",
       "targets": [
         {
@@ -37,7 +37,8 @@
           },
           "unit": "percent",
           "min": 0,
-          "max": 100
+          "max": 100,
+          "decimals": 1
         }
       },
       "gridPos": {
@@ -53,7 +54,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "jvm_memory_used_bytes{area=\"heap\"} / 1024 / 1024",
+          "expr": "sum(jvm_memory_used_bytes{area=\"heap\"}) / 1024 / 1024",
           "refId": "A"
         }
       ],
@@ -95,7 +96,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "rate(http_server_requests_total[1m])",
+          "expr": "rate(http_server_requests_seconds_count[1m])",
           "refId": "A"
         }
       ],
@@ -121,7 +122,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_total[1m]) * 1000",
+          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m]) * 1000",
           "refId": "A"
         }
       ],
@@ -159,7 +160,7 @@
     },
     {
       "id": 5,
-      "title": "DB 연결 풀 사용량",
+      "title": "DB 활성 연결",
       "type": "stat",
       "targets": [
         {
@@ -204,7 +205,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "jvm_threads_live",
+          "expr": "jvm_threads_live_threads",
           "refId": "A"
         }
       ],
@@ -231,12 +232,12 @@
         {
           "expr": "system_cpu_usage * 100",
           "refId": "A",
-          "legendFormat": "시스템 CPU"
+          "legendFormat": "시스템 CPU (%)"
         },
         {
           "expr": "process_cpu_usage * 100",
           "refId": "B",
-          "legendFormat": "프로세스 CPU"
+          "legendFormat": "프로세스 CPU (%)"
         }
       ],
       "fieldConfig": {
@@ -245,8 +246,7 @@
             "mode": "palette-classic"
           },
           "unit": "percent",
-          "min": 0,
-          "max": 100
+          "min": 0
         }
       },
       "gridPos": {
@@ -258,18 +258,23 @@
     },
     {
       "id": 8,
-      "title": "메모리 사용량 추세",
+      "title": "JVM 메모리 상세",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "jvm_memory_used_bytes{area=\"heap\"} / 1024 / 1024",
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Eden Space\"} / 1024 / 1024",
           "refId": "A",
-          "legendFormat": "힙 메모리 (MB)"
+          "legendFormat": "G1 Eden (MB)"
         },
         {
-          "expr": "jvm_memory_max_bytes{area=\"heap\"} / 1024 / 1024",
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Old Gen\"} / 1024 / 1024",
           "refId": "B",
-          "legendFormat": "힙 최대 (MB)"
+          "legendFormat": "G1 Old Gen (MB)"
+        },
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Survivor Space\"} / 1024 / 1024",
+          "refId": "C",
+          "legendFormat": "G1 Survivor (MB)"
         }
       ],
       "fieldConfig": {
@@ -289,17 +294,22 @@
     },
     {
       "id": 9,
-      "title": "HTTP 처리량 & 응답시간",
+      "title": "HTTP 요청 처리량",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "rate(http_server_requests_total{uri=\"/user/login\"}[1m])",
+          "expr": "rate(http_server_requests_seconds_count{uri=\"/user/login\"}[1m])",
           "refId": "A",
           "legendFormat": "로그인 요청/초"
         },
         {
-          "expr": "rate(http_server_requests_total[1m])",
-          "refId": "B", 
+          "expr": "rate(http_server_requests_seconds_count{uri=\"/actuator/prometheus\"}[1m])",
+          "refId": "B",
+          "legendFormat": "Prometheus 수집/초"
+        },
+        {
+          "expr": "rate(http_server_requests_seconds_count[1m])",
+          "refId": "C", 
           "legendFormat": "전체 요청/초"
         }
       ],
@@ -320,23 +330,18 @@
     },
     {
       "id": 10,
-      "title": "응답시간 분포 (P50, P95, P99)",
+      "title": "HTTP 응답시간 추세",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "histogram_quantile(0.50, rate(http_server_requests_seconds_bucket[1m])) * 1000",
+          "expr": "rate(http_server_requests_seconds_sum{uri=\"/user/login\"}[1m]) / rate(http_server_requests_seconds_count{uri=\"/user/login\"}[1m]) * 1000",
           "refId": "A",
-          "legendFormat": "P50 (중간값)"
+          "legendFormat": "로그인 응답시간 (ms)"
         },
         {
-          "expr": "histogram_quantile(0.95, rate(http_server_requests_seconds_bucket[1m])) * 1000",
+          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m]) * 1000",
           "refId": "B",
-          "legendFormat": "P95"
-        },
-        {
-          "expr": "histogram_quantile(0.99, rate(http_server_requests_seconds_bucket[1m])) * 1000",
-          "refId": "C",
-          "legendFormat": "P99"
+          "legendFormat": "전체 평균 응답시간 (ms)"
         }
       ],
       "fieldConfig": {
@@ -373,6 +378,11 @@
           "expr": "hikaricp_connections_max",
           "refId": "C",
           "legendFormat": "최대 연결"
+        },
+        {
+          "expr": "hikaricp_connections_pending",
+          "refId": "D",
+          "legendFormat": "대기 중"
         }
       ],
       "fieldConfig": {
@@ -396,12 +406,12 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "rate(jvm_gc_collection_seconds_count[1m])",
+          "expr": "rate(jvm_gc_pause_seconds_count[1m])",
           "refId": "A",
           "legendFormat": "GC 횟수/초"
         },
         {
-          "expr": "rate(jvm_gc_collection_seconds_sum[1m]) * 1000",
+          "expr": "rate(jvm_gc_pause_seconds_sum[1m]) * 1000",
           "refId": "B",
           "legendFormat": "GC 시간 (ms/초)"
         }
@@ -426,17 +436,17 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "jvm_threads_live",
+          "expr": "jvm_threads_live_threads",
           "refId": "A",
           "legendFormat": "활성 Thread"
         },
         {
-          "expr": "jvm_threads_daemon",
+          "expr": "jvm_threads_daemon_threads",
           "refId": "B",
           "legendFormat": "데몬 Thread"
         },
         {
-          "expr": "jvm_threads_peak",
+          "expr": "jvm_threads_peak_threads",
           "refId": "C",
           "legendFormat": "최대 Thread"
         }
@@ -463,8 +473,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "uid": "kafka-experiment-full",
-  "version": 2,
+  "uid": "kafka-experiment-fixed",
+  "version": 3,
   "schemaVersion": 30,
   "refresh": "5s"
 }
