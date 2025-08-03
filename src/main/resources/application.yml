@@ -20,7 +20,7 @@ spring:
       on-profile: "devDB"
 
   datasource:
-    url:  ${DATASOURCE_URL}
+    url: ${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -56,7 +56,6 @@ spring:
         show_sql: false
         dialect: org.hibernate.dialect.PostgreSQLDialect
 ---
-
 spring:
   config:
     activate:
@@ -68,7 +67,6 @@ spring:
 
   messages:
     basename: errors
-
 ---
 spring:
   kafka:
@@ -80,7 +78,6 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
 ---
 # Actuator 모니터링 설정
 management:
@@ -102,3 +99,10 @@ management:
         enabled: true
   security:
     enabled: false
+
+# Spring Security 완전 비활성화
+spring:
+  security:
+    enabled: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
