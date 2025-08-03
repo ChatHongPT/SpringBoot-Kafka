@@ -21,7 +21,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-// @Component // Kafka 테스트 시에만 활성화
+@Component // Kafka 활성화
 @RequiredArgsConstructor
 public class ChatKafkaListener {
 
