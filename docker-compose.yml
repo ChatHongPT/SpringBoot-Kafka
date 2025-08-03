@@ -34,7 +34,8 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_JMX_PORT: 9101
-      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_JMX_HOSTNAME: kafka
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=9101"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
     volumes:
       - kafka-data:/var/lib/kafka/data
@@ -56,16 +57,30 @@ services:
     networks:
       - kafka-network
 
-  # Grafana 모니터링
+  # Grafana 모니터링 (성능 비교용)
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     ports:
-      - "3000:3000"
+      - "3000:3000"  # 메인 모니터링 대시보드
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+      - GF_DEFAULT_LOCALE=ko-KR
     volumes:
       - grafana-data:/var/lib/grafana
+      - ./kafka-performance-dashboard.json:/var/lib/grafana/dashboards/kafka-performance.json:ro
+    networks:
+      - kafka-network
+
+  # Prometheus 모니터링 (no1서버)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: no1-prometheus
+    ports:
+      - "443:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - kafka-network
 
@@ -112,3 +127,4 @@ volumes:
   kafka-data:
   postgres-data:
   grafana-data:
+  prometheus-data:
