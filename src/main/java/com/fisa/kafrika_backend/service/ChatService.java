@@ -54,7 +54,8 @@ public class ChatService {
         ChatRoom chatRoom = chatRoomRepository.findByName(DEFAULT_CHATROOM)
                 .orElseThrow(() -> new CustomException(CHATROOM_NOT_FOUND));
 
-        User user = userRepository.findById(chatMessageRequest.getUserId())
+        Long userId = extractUserIdFromString(chatMessageRequest.getUserId());
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         ChatMessage saved = chattingRepository.save(
@@ -78,10 +79,27 @@ public class ChatService {
         try {
             String message = objectMapper.writeValueAsString(chatMessageRequest);
             System.out.println("직렬화 완료");
-            kafkaTemplate.send(KAFKA_TOPIC, String.valueOf(chatMessageRequest.getUserId()), message);
+            kafkaTemplate.send(KAFKA_TOPIC, chatMessageRequest.getUserId(), message);
         } catch (JsonProcessingException e) {
             // TODO: db에 저장?
             throw new RuntimeException("Kafka 직렬화 실패", e);
         }
+    }
+    
+    /**
+     * "user1", "user2" 형태의 문자열에서 숫자만 추출하여 Long으로 변환
+     */
+    private Long extractUserIdFromString(String userIdStr) {
+        if (userIdStr == null || userIdStr.trim().isEmpty()) {
+            throw new IllegalArgumentException("UserId cannot be null or empty");
+        }
+        
+        // "user1" -> "1", "user2" -> "2"
+        String numericPart = userIdStr.replaceAll("[^0-9]", "");
+        if (numericPart.isEmpty()) {
+            throw new IllegalArgumentException("UserId must contain numeric part: " + userIdStr);
+        }
+        
+        return Long.parseLong(numericPart);
     }
 }
