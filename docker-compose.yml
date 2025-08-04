@@ -43,7 +43,7 @@ services:
       KAFKA_JMX_HOSTNAME: kafka
       KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=9101"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      KAFKA_HEAP_OPTS: "-Xmx1G -Xms512M"
+      KAFKA_HEAP_OPTS: "-Xmx1.5G -Xms1G"
     volumes:
       - kafka-data:/var/lib/kafka/data
     networks:
@@ -51,30 +51,11 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1.5G
+          memory: 2G
         reservations:
-          memory: 512M
+          memory: 1G
 
-  # 카프카 관리 UI (선택사항)
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: kafka-ui
-    depends_on:
-      - kafka
-    ports:
-      - "80:8080"
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-    networks:
-      - kafka-network
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
-          memory: 128M
+# Kafka UI 제거 - 부하테스트에 집중
 
   # Grafana 모니터링 (성능 비교용)
   grafana:
