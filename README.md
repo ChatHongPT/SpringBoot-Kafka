@@ -7,7 +7,7 @@ Spring Boot 기반의 실시간 채팅 애플리케이션으로, Kafka를 통한
 ## 📁 프로젝트 구조
 
 ```
-Kafka-Test/
+SpringBoot-Kafka/
 ├── 📁 src/                          # Spring Boot 소스 코드
 │   ├── main/java/com/fisa/kafrika_backend/
 │   └── main/resources/
@@ -279,22 +279,6 @@ docker exec -it kafka kafka-console-producer --topic chat-message --bootstrap-se
 - **사용자 회원가입**: `POST /user/signup`
 - **사용자 로그인**: `POST /user/login`
 - **헬스체크**: `GET /actuator/health`
-
-## 🤝 기여하기
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
-
-## 📞 연락처
-
-프로젝트 관련 문의사항이 있으시면 이슈를 등록해주세요.
 
 ---
 
