@@ -160,11 +160,11 @@
     },
     {
       "id": 5,
-      "title": "DB 활성 연결",
+      "title": "Kafka 연결 수",
       "type": "stat",
       "targets": [
         {
-          "expr": "hikaricp_connections_active",
+          "expr": "kafka_consumer_connection_count",
           "refId": "A"
         }
       ],
@@ -185,7 +185,7 @@
               },
               {
                 "color": "red",
-                "value": 8
+                "value": 10
               }
             ]
           },
@@ -258,23 +258,28 @@
     },
     {
       "id": 8,
-      "title": "JVM 메모리 상세",
+      "title": "JVM 메모리 상세 (실제 데이터)",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Eden Space\"} / 1024 / 1024",
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Eden Space\"} / 1024 / 1024",
           "refId": "A",
-          "legendFormat": "G1 Eden (MB)"
+          "legendFormat": "Eden Space (MB)"
         },
         {
-          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Old Gen\"} / 1024 / 1024",
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Tenured Gen\"} / 1024 / 1024",
           "refId": "B",
-          "legendFormat": "G1 Old Gen (MB)"
+          "legendFormat": "Tenured Gen (MB)"
         },
         {
-          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"G1 Survivor Space\"} / 1024 / 1024",
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Survivor Space\"} / 1024 / 1024",
           "refId": "C",
-          "legendFormat": "G1 Survivor (MB)"
+          "legendFormat": "Survivor Space (MB)"
+        },
+        {
+          "expr": "jvm_threads_live_threads",
+          "refId": "D",
+          "legendFormat": "활성 Thread 수"
         }
       ],
       "fieldConfig": {
@@ -282,7 +287,7 @@
           "color": {
             "mode": "palette-classic"
           },
-          "unit": "decbytes"
+          "unit": "short"
         }
       },
       "gridPos": {
@@ -361,28 +366,28 @@
     },
     {
       "id": 11,
-      "title": "DB 연결 풀 상태",
+      "title": "System 및 Process 메트릭",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "hikaricp_connections_active",
+          "expr": "system_cpu_usage * 100",
           "refId": "A",
-          "legendFormat": "활성 연결"
+          "legendFormat": "시스템 CPU (%)"
         },
         {
-          "expr": "hikaricp_connections_idle",
-          "refId": "B",
-          "legendFormat": "유휴 연결"
+          "expr": "process_cpu_usage * 100",
+          "refId": "B",  
+          "legendFormat": "프로세스 CPU (%)"
         },
         {
-          "expr": "hikaricp_connections_max",
+          "expr": "system_load_average_1m",
           "refId": "C",
-          "legendFormat": "최대 연결"
+          "legendFormat": "1분 평균 로드"
         },
         {
-          "expr": "hikaricp_connections_pending",
+          "expr": "process_files_open_files",
           "refId": "D",
-          "legendFormat": "대기 중"
+          "legendFormat": "열린 파일 수"
         }
       ],
       "fieldConfig": {
@@ -414,6 +419,16 @@
           "expr": "rate(jvm_gc_pause_seconds_sum[1m]) * 1000",
           "refId": "B",
           "legendFormat": "GC 시간 (ms/초)"
+        },
+        {
+          "expr": "jvm_gc_live_data_size_bytes / 1024 / 1024",
+          "refId": "C",
+          "legendFormat": "GC Live Data (MB)"
+        },
+        {
+          "expr": "jvm_gc_max_data_size_bytes / 1024 / 1024",
+          "refId": "D",
+          "legendFormat": "GC Max Data (MB)"
         }
       ],
       "fieldConfig": {
@@ -432,7 +447,7 @@
     },
     {
       "id": 13,
-      "title": "JVM Thread 상태",
+      "title": "JVM Thread 상태 상세",
       "type": "timeseries",
       "targets": [
         {
@@ -449,6 +464,11 @@
           "expr": "jvm_threads_peak_threads",
           "refId": "C",
           "legendFormat": "최대 Thread"
+        },
+        {
+          "expr": "jvm_threads_started_threads_total",
+          "refId": "D",
+          "legendFormat": "시작된 Thread 총합"
         }
       ],
       "fieldConfig": {

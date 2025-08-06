@@ -10,8 +10,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group 1 - Load Only">
-        <intProp name="ThreadGroup.num_threads">6000</intProp>
-        <intProp name="ThreadGroup.ramp_time">120</intProp>
+        <intProp name="ThreadGroup.num_threads">1000</intProp>
+        <intProp name="ThreadGroup.ramp_time">500</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
@@ -28,14 +28,14 @@
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
-          <boolProp name="stopThread">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
         <eu.luminis.jmeter.wssampler.OpenWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.OpenWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.OpenWebSocketSampler" testname="Open Connection" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <stringProp name="connectTimeout">20000</stringProp>
           <stringProp name="readTimeout">6000</stringProp>
@@ -44,7 +44,7 @@
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="CONNECT" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">CONNECT
@@ -62,7 +62,7 @@ heart-beat:0,0
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SUBSCRIBE" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SUBSCRIBE
@@ -80,11 +80,11 @@ destination:/topic/chat
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 1" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message1}&quot;}&#x0;</stringProp>
@@ -98,11 +98,11 @@ content-type:application/json
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 2" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message2}&quot;}&#x0;</stringProp>
@@ -116,11 +116,11 @@ content-type:application/json
         <eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler guiclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSamplerGui" testclass="eu.luminis.jmeter.wssampler.SingleWriteWebSocketSampler" testname="SEND Message 3" enabled="true">
           <boolProp name="TLS">false</boolProp>
           <stringProp name="server">113.198.66.77</stringProp>
-          <stringProp name="port">10162</stringProp>
+          <stringProp name="port">18161</stringProp>
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message3}&quot;}&#x0;</stringProp>
@@ -277,7 +277,7 @@ content-type:application/json
         <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
-            <n>saveConfig</n>
+            <name>saveConfig</name>
             <value class="SampleSaveConfiguration">
               <time>true</time>
               <latency>true</latency>
@@ -314,7 +314,7 @@ content-type:application/json
         <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
-            <n>saveConfig</n>
+            <name>saveConfig</name>
             <value class="SampleSaveConfiguration">
               <time>true</time>
               <latency>true</latency>

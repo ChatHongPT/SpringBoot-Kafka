@@ -84,7 +84,7 @@ destination:/topic/chat
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message1}&quot;}&#x0;</stringProp>
@@ -102,7 +102,7 @@ content-type:application/json
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message2}&quot;}&#x0;</stringProp>
@@ -120,7 +120,7 @@ content-type:application/json
           <stringProp name="path">/ws</stringProp>
           <boolProp name="binaryPayload">false</boolProp>
           <stringProp name="requestData">SEND
-destination:/pub/kafka-chat
+destination:/pub/chat
 content-type:application/json
 
 {&quot;userId&quot;:&quot;${loginId}&quot;,&quot;message&quot;:&quot;${message3}&quot;}&#x0;</stringProp>
