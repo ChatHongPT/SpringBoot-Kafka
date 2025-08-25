@@ -1,4 +1,4 @@
-##🏧 Kubernetes 기반 DevOps 파이프라인으로 구축한 금융권 서비스 장애 대응 시나리오 프로젝트
+## ☸️ Kubernetes 기반 DevOps 파이프라인으로 구축한 금융권 서비스 장애 대응 시나리오 프로젝트
 
 <img width="500" height="500" alt="won-removebg-preview" src="https://github.com/user-attachments/assets/8291be1b-264b-43bb-a03b-7fffad266033" />
 
