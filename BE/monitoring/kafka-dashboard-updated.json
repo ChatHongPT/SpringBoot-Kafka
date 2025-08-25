@@ -1,0 +1,500 @@
+{
+  "id": null,
+  "title": "Kafka Experiment Dashboard",
+  "tags": ["kafka", "experiment", "performance"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "시스템 CPU 사용률 (%)",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "system_cpu_usage * 100",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "decimals": 1
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 2,
+      "title": "힙 메모리 (MB)",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "sum(jvm_memory_used_bytes{area=\"heap\"}) / 1024 / 1024",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 300
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "decbytes",
+          "decimals": 0
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      }
+    },
+    {
+      "id": 3,
+      "title": "HTTP 요청/초",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count[1m])",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "reqps",
+          "decimals": 1
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      }
+    },
+    {
+      "id": 4,
+      "title": "평균 응답시간 (ms)",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m]) * 1000",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 1
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      }
+    },
+    {
+      "id": 5,
+      "title": "Kafka 연결 수",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "kafka_consumer_connection_count",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      }
+    },
+    {
+      "id": 6,
+      "title": "JVM Thread 수",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "jvm_threads_live_threads",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      }
+    },
+    {
+      "id": 7,
+      "title": "CPU 사용률 추세",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "system_cpu_usage * 100",
+          "refId": "A",
+          "legendFormat": "시스템 CPU (%)"
+        },
+        {
+          "expr": "process_cpu_usage * 100",
+          "refId": "B",
+          "legendFormat": "프로세스 CPU (%)"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "percent",
+          "min": 0
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "id": 8,
+      "title": "JVM 메모리 상세 (실제 데이터)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Eden Space\"} / 1024 / 1024",
+          "refId": "A",
+          "legendFormat": "Eden Space (MB)"
+        },
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Tenured Gen\"} / 1024 / 1024",
+          "refId": "B",
+          "legendFormat": "Tenured Gen (MB)"
+        },
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\",id=\"Survivor Space\"} / 1024 / 1024",
+          "refId": "C",
+          "legendFormat": "Survivor Space (MB)"
+        },
+        {
+          "expr": "jvm_threads_live_threads",
+          "refId": "D",
+          "legendFormat": "활성 Thread 수"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      }
+    },
+    {
+      "id": 9,
+      "title": "HTTP 요청 처리량",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{uri=\"/user/login\"}[1m])",
+          "refId": "A",
+          "legendFormat": "로그인 요청/초"
+        },
+        {
+          "expr": "rate(http_server_requests_seconds_count{uri=\"/actuator/prometheus\"}[1m])",
+          "refId": "B",
+          "legendFormat": "Prometheus 수집/초"
+        },
+        {
+          "expr": "rate(http_server_requests_seconds_count[1m])",
+          "refId": "C", 
+          "legendFormat": "전체 요청/초"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "reqps"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 14
+      }
+    },
+    {
+      "id": 10,
+      "title": "HTTP 응답시간 추세",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_sum{uri=\"/user/login\"}[1m]) / rate(http_server_requests_seconds_count{uri=\"/user/login\"}[1m]) * 1000",
+          "refId": "A",
+          "legendFormat": "로그인 응답시간 (ms)"
+        },
+        {
+          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m]) * 1000",
+          "refId": "B",
+          "legendFormat": "전체 평균 응답시간 (ms)"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "ms"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 14
+      }
+    },
+    {
+      "id": 11,
+      "title": "System 및 Process 메트릭",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "system_cpu_usage * 100",
+          "refId": "A",
+          "legendFormat": "시스템 CPU (%)"
+        },
+        {
+          "expr": "process_cpu_usage * 100",
+          "refId": "B",  
+          "legendFormat": "프로세스 CPU (%)"
+        },
+        {
+          "expr": "system_load_average_1m",
+          "refId": "C",
+          "legendFormat": "1분 평균 로드"
+        },
+        {
+          "expr": "process_files_open_files",
+          "refId": "D",
+          "legendFormat": "열린 파일 수"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 14
+      }
+    },
+    {
+      "id": 12,
+      "title": "JVM GC 활동",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_count[1m])",
+          "refId": "A",
+          "legendFormat": "GC 횟수/초"
+        },
+        {
+          "expr": "rate(jvm_gc_pause_seconds_sum[1m]) * 1000",
+          "refId": "B",
+          "legendFormat": "GC 시간 (ms/초)"
+        },
+        {
+          "expr": "jvm_gc_live_data_size_bytes / 1024 / 1024",
+          "refId": "C",
+          "legendFormat": "GC Live Data (MB)"
+        },
+        {
+          "expr": "jvm_gc_max_data_size_bytes / 1024 / 1024",
+          "refId": "D",
+          "legendFormat": "GC Max Data (MB)"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      }
+    },
+    {
+      "id": 13,
+      "title": "JVM Thread 상태 상세",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "jvm_threads_live_threads",
+          "refId": "A",
+          "legendFormat": "활성 Thread"
+        },
+        {
+          "expr": "jvm_threads_daemon_threads",
+          "refId": "B",
+          "legendFormat": "데몬 Thread"
+        },
+        {
+          "expr": "jvm_threads_peak_threads",
+          "refId": "C",
+          "legendFormat": "최대 Thread"
+        },
+        {
+          "expr": "jvm_threads_started_threads_total",
+          "refId": "D",
+          "legendFormat": "시작된 Thread 총합"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      }
+    }
+  ],
+  "time": {
+    "from": "now-10m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "uid": "kafka-experiment-fixed",
+  "version": 3,
+  "schemaVersion": 30,
+  "refresh": "5s"
+}
