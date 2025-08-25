@@ -1,4 +1,4 @@
-# Kafrika Full-Stack Chat Application
+## Kubernetes 기반 DevOps 파이프라인으로 구축한 금융권 서비스 장애 대응 시나리오 프로젝트
 
 <img width="500" height="500" alt="won-removebg-preview" src="https://github.com/user-attachments/assets/8291be1b-264b-43bb-a03b-7fffad266033" />
 
@@ -59,7 +59,6 @@ SpringBoot-Kafka/
   <td>
     <img src="https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white"/>&nbsp 
     <img src="https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white"/>&nbsp 
-    <img alt="NHN Cloud" src="https://img.shields.io/badge/NHN%20Cloud-0052CC?style=for-the-badge&logo=redis&logoColor=white"/>&nbsp 
   </td>
 </tr>
 
@@ -67,9 +66,6 @@ SpringBoot-Kafka/
   <td align="center">DataBase</td>
   <td>
     <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/-MongoDB-13aa52?style=for-the-badge&logo=mongodb&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"/>&nbsp 
   </td>
 </tr>
 
@@ -82,19 +78,9 @@ SpringBoot-Kafka/
 </tr>
 
 <tr>
-  <td align="center">Storage</td>
-  <td>
-    <img alt="NHN Object Storage" src="https://img.shields.io/badge/NHN%20Cloud%20Object%20Stroage-0052CC?style=for-the-badge&logo=redis&logoColor=white"/>&nbsp 
-  </td>
-</tr>
-
-<tr>
   <td align="center">Monitoring</td>
   <td>
     <img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=Grafana&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/Elastic-005571?style=for-the-badge&logo=Elastic&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/Logstash-005571?style=for-the-badge&logo=Logstash&logoColor=white"/>&nbsp 
-    <img src="https://img.shields.io/badge/Kibana-E8478B?style=for-the-badge&logo=Kibana&logoColor=white"/>&nbsp 
     <img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white"/>&nbsp 
   </td>
 </tr>
@@ -491,7 +477,7 @@ GET /actuator/metrics/kafka.consumer.records-consumed-total
 ### 🏠 메인 페이지
 
 <div align="center">
-  <img width="800" alt="메인 페이지" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=메인+페이지" />
+  <img width="800" alt="메인 페이지" src="https://github.com/user-attachments/assets/57d1039f-fb61-49c1-8648-64ee509ed2d3" />
 </div>
 
 ### 🔐 인증 페이지
@@ -499,76 +485,30 @@ GET /actuator/metrics/kafka.consumer.records-consumed-total
 #### 로그인 페이지
 
 <div align="center">
-  <img width="400" alt="로그인 페이지" src="https://via.placeholder.com/400x600/3b82f6/ffffff?text=로그인+페이지" />
+  <img width="400" alt="로그인 페이지" src="https://github.com/user-attachments/assets/6fd5985a-ac28-4203-838d-e3d29ce2cd1c" />
 </div>
 
 #### 회원가입 페이지
 
 <div align="center">
-  <img width="400" alt="회원가입 페이지" src="https://via.placeholder.com/400x600/3b82f6/ffffff?text=회원가입+페이지" />
+  <img width="400" alt="회원가입 페이지" src="https://github.com/user-attachments/assets/4525443d-b92b-4460-bc7d-1664341db83b"/>
 </div>
 
 #### 비밀번호 재설정 페이지
 
 <div align="center">
-  <img width="400" alt="비밀번호 재설정 페이지" src="https://via.placeholder.com/400x600/3b82f6/ffffff?text=비밀번호+재설정+페이지" />
+  <img width="400" alt="비밀번호 재설정 페이지" src="https://github.com/user-attachments/assets/3bf0d5c1-5170-40e1-a806-9d39151ab6af" />
 </div>
 
-### 💬 채팅 페이지
-
-#### 채팅방 목록
-
-<div align="center">
-  <img width="800" alt="채팅방 목록" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=채팅방+목록" />
-</div>
-
-#### 실시간 채팅
-
-<div align="center">
-  <img width="800" alt="실시간 채팅" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=실시간+채팅" />
-</div>
 
 ### 📊 모니터링 대시보드
 
 #### 그라파나 대시보드
 
 <div align="center">
-  <img width="800" alt="그라파나 대시보드" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=그라파나+대시보드" />
+  <img width="800" alt="그라파나 대시보드" src="https://github.com/user-attachments/assets/130d8b69-f8c0-4db3-bb24-a67490d95c33" />
 </div>
 
-#### 프로메테우스 메트릭
-
-<div align="center">
-  <img width="800" alt="프로메테우스 메트릭" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=프로메테우스+메트릭" />
-</div>
-
-### 📱 반응형 디자인
-
-#### 모바일 화면
-
-<div align="center">
-  <img width="300" alt="모바일 화면" src="https://via.placeholder.com/300x600/3b82f6/ffffff?text=모바일+화면" />
-</div>
-
-#### 태블릿 화면
-
-<div align="center">
-  <img width="600" alt="태블릿 화면" src="https://via.placeholder.com/600x400/3b82f6/ffffff?text=태블릿+화면" />
-</div>
-
-### 🔧 관리자 페이지
-
-#### 사용자 관리
-
-<div align="center">
-  <img width="800" alt="사용자 관리" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=사용자+관리" />
-</div>
-
-#### 시스템 모니터링
-
-<div align="center">
-  <img width="800" alt="시스템 모니터링" src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=시스템+모니터링" />
-</div>
 
 ## 🔧 개발 환경 설정
 
@@ -641,34 +581,25 @@ docker exec -it kafka kafka-topics --list --bootstrap-server localhost:9092
 
 #### 프론트엔드 개선
 
-- [ ] **채팅 문의 CRUD 구현**
-- [ ] **실시간 채팅 상담창 구현**
-- [ ] **Redux Toolkit 도입**
-- [ ] **React Query 도입**
+- [x] **채팅 문의 CRUD 구현**
+- [x] **실시간 채팅 상담창 구현**
+- [x] **Redux Toolkit 도입**
+- [x] **React Query 도입**
 
 #### 백엔드 개선
 
-- [ ] **API 문서화 (Swagger)**
-- [ ] **보안 강화 (JWT, OAuth2)**
-- [ ] **캐싱 전략 (Redis)**
-- [ ] **로깅 시스템 개선**
+- [x] **API 문서화 (Swagger)**
+- [x] **보안 강화 (JWT, OAuth2)**
+- [x] **캐싱 전략 (Redis)**
+- [x] **로깅 시스템 개선**
 
 ### 🛠 기술적 개선사항
 
-- [ ] **CI/CD 파이프라인 구축**
-- [ ] **테스트 커버리지 80% 이상**
-- [ ] **성능 최적화**
-- [ ] **마이크로서비스 아키텍처 전환**
-
-## 👥 팀
-
-- **정서현**
-- **신기범**
-- **최홍석**
-- **최소영**
+- [x] **CI/CD 파이프라인 구축**
+- [x] **테스트 커버리지 80% 이상**
+- [x] **성능 최적화**
+- [x] **마이크로서비스 아키텍처 전환**
 
 ---
 
-**Kafrika Full-Stack Chat Application** - 실시간 채팅과 부하 테스트를 통한 성능 분석 프로젝트
-
-© 2024 Won Payments. All Rights Reserved.
+© 2025 Won Payments. All Rights Reserved.
