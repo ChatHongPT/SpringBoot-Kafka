@@ -4,12 +4,12 @@
 
 ## 🚀 프로젝트 소개
 
-KAFRIKA 팀은 우리페이먼츠와 협업하여 대용량 트래픽을 처리하는 클라우드 기반 시스템을 개발하는 팀입니다. 이 프로젝트는 Spring Boot 백엔드와 React 프론트엔드로 구성된 실시간 채팅 애플리케이션입니다.
+이 프로젝트는 Kubernetes 기반 DevOps 파이프라인을 활용하여 금융권에서 발생할 수 있는 서비스 장애 상황을 시뮬레이션하고 대응 절차를 자동화하기 위해 설계되었습니다.
 
 ## 📁 프로젝트 구조
 
 ```
-SpringBoot-Kafka/
+Woori-Payments/
 ├── BE/                    # 백엔드 (Spring Boot + Kafka)
 │   ├── src/              # Spring Boot 소스 코드
 │   ├── build/            # 빌드 결과물
